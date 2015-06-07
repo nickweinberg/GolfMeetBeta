@@ -10,6 +10,11 @@ from flask import render_template, Blueprint
 
 from flask import render_template, Blueprint
 
+from flask.ext.login import login_required
+
+from project import bcrypt, db
+from project.models import User
+from project.user.forms import LoginForm, RegisterForm
 
 ################
 #### config ####
@@ -23,6 +28,8 @@ scorecard_blueprint = Blueprint('scorecard', __name__,)
 ################
 
 
-@scorecard_blueprint.route('/scorecards')
-def home():
-    return render_template('scorecard/index.html')
+@scorecard_blueprint.route('/scorecards/all')
+@login_required
+def scorecard_main():
+    return render_template('scorecard/scorecards.html')
+

@@ -45,8 +45,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var ScoreCardList = __webpack_require__(149);
-	var ScoreCard = __webpack_require__(148);
+	var ScoreCardList = __webpack_require__(148);
+	var ScoreCard = __webpack_require__(149);
 
 	React.render(React.createElement(ScoreCardList, null), document.getElementById("scorecard-container"));
 
@@ -18907,25 +18907,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-
-	var ScoreCard = React.createClass({displayName: "ScoreCard",
-	    render: function() {
-	        var card = this.props.card;
-
-	        return (
-	            React.createElement("li", null, "Scorecard: ", React.createElement("small", null, card.date.toLocaleString()))
-	        );
-	    }
-	});
-
-	module.exports = ScoreCard;
-
-/***/ },
-/* 149 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var ScoreCard = __webpack_require__(148);
+	var ScoreCard = __webpack_require__(149);
 
 	// a list of last N scorecards
 	var ScoreCardList = React.createClass({displayName: "ScoreCardList",
@@ -18938,7 +18920,6 @@
 	    },
 	    render: function() {
 	        var cards = this.state.data.map(function(card) {
-	            console.log('hi');
 	           return React.createElement(ScoreCard, {key: card.id, card: card})
 	        });
 	        return (
@@ -18952,6 +18933,52 @@
 	});
 
 	module.exports = ScoreCardList;
+
+/***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var HoleScore = __webpack_require__(150);
+
+	var ScoreCard = React.createClass({displayName: "ScoreCard",
+	    render: function() {
+	        var card = this.props.card;
+	        var holeNums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
+	        var holes = holeNums.map(function(holeNumber){
+	            return React.createElement(HoleScore, {num: holeNumber})
+	        });
+
+	        return (
+	            React.createElement("div", null, 
+	                React.createElement("li", null, "Scorecard: ", React.createElement("small", null, card.date.toLocaleString())), 
+	                holes
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ScoreCard;
+
+/***/ },
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+
+	var HoleScore = React.createClass({displayName: "HoleScore",
+	  render: function() {
+	     return(React.createElement("span", null, 
+	       React.createElement("label", {for: this.props.num}, "Hole ", this.props.num), 
+	       React.createElement("input", {type: "number", min: "1", name: this.props.num})
+
+	       ))
+	  }
+
+	});
+
+	module.exports = HoleScore;
 
 /***/ }
 /******/ ]);

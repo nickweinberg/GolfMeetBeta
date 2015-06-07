@@ -12,7 +12,6 @@ var ScoreCardList = React.createClass({
     },
     render: function() {
         var cards = this.state.data.map(function(card) {
-            console.log('hi');
            return <ScoreCard key={card.id} card={card} />
         });
         return (
