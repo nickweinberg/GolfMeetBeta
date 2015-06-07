@@ -1,16 +1,13 @@
 var React = require("react");
 
 var ScoreCard = React.createClass({
-    getInitialState: function() {
-        return {}
-    },
     render: function() {
+        var card = this.props.card;
 
         return (
-            <div>
-                I am a ScoreCard.
-            </div>
-
-        )
+            <li>Scorecard: <small>{card.date.toLocaleString()}</small></li>
+        );
     }
 });
+
+module.exports = ScoreCard;

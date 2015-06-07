@@ -45,9 +45,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var ScoreCardList = __webpack_require__(149);
 	var ScoreCard = __webpack_require__(148);
 
-	React.render(React.createElement(ScoreCard, null), document.getElementById("message-board-container"));
+	React.render(React.createElement(ScoreCardList, null), document.getElementById("scorecard-container"));
 
 
 /***/ },
@@ -18908,19 +18909,49 @@
 	var React = __webpack_require__(1);
 
 	var ScoreCard = React.createClass({displayName: "ScoreCard",
-	    getInitialState: function() {
-	        return {}
-	    },
 	    render: function() {
+	        var card = this.props.card;
 
 	        return (
-	            React.createElement("div", null, 
-	                "I am a ScoreCard."
-	            )
-
-	        )
+	            React.createElement("li", null, "Scorecard: ", React.createElement("small", null, card.date.toLocaleString()))
+	        );
 	    }
 	});
+
+	module.exports = ScoreCard;
+
+/***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var ScoreCard = __webpack_require__(148);
+
+	// a list of last N scorecards
+	var ScoreCardList = React.createClass({displayName: "ScoreCardList",
+	    getInitialState: function() {
+	        return {
+	            data: [{id: 1, date: 123}, {id:2, date:234}, {id: 3, date: 344}],
+	            page: 1,
+	            pages: 1
+	        }
+	    },
+	    render: function() {
+	        var cards = this.state.data.map(function(card) {
+	            console.log('hi');
+	           return React.createElement(ScoreCard, {key: card.id, card: card})
+	        });
+	        return (
+	            React.createElement("div", null, 
+	                React.createElement("ul", null, 
+	                    cards
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ScoreCardList;
 
 /***/ }
 /******/ ]);

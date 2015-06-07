@@ -39,5 +39,5 @@ class User(db.Model):
 
 
 
-class ScoreCard(db.Model):
-    pass
+# class ScoreCard(db.Model):
+#     pass

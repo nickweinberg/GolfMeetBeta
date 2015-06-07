@@ -42,10 +42,12 @@ db = SQLAlchemy(app)
 from project.user.views import user_blueprint
 from project.main.views import main_blueprint
 from project.api.views import api_blueprint
+from project.scorecard.views import scorecard_blueprint
+
 app.register_blueprint(user_blueprint)
 app.register_blueprint(main_blueprint)
 app.register_blueprint(api_blueprint)
-
+app.register_blueprint(scorecard_blueprint)
 
 ###################
 ### flask-login ####
