@@ -34,18 +34,18 @@ $ python manage.py runserver
 ```
 
 ### Install node_modules
-'''sh
+```sh
 $ cd project/static/js/
 $ npm install webpack -g
 $ npm install
-'''
+```
 
 
 ### Webpack Transform JSX
-'''sh
+```sh
 $ cd project/static/js/
 $ webpack --watch
-'''
+```
 
 
 ### Testing
