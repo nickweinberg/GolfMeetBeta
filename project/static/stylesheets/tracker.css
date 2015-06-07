@@ -1,0 +1,109 @@
+
+/*----------Scoreboard Box-------------*/
+
+
+.scoreboardBox,
+.scorecardBox,
+.graphBox,
+.goalsBox{
+    min-height:500px;
+}
+
+
+.container .row {
+  margin: 0;
+}
+
+/*----Scoreboard Table----*/
+
+table {
+    margin:0 auto 15px auto;
+    font-size: 15px;
+    text-align: center;
+}
+
+thead td,
+thead tr{
+	width: 50px;
+	background: #555;
+    color: white;
+     height:30px;
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+#parRow {
+    width: 50px;
+    height: 30px;
+    color: #fff;
+
+}
+
+#parRow td {
+    background: #eee;
+}
+
+.tdFirst,
+.tdLast{
+    width:70px;
+}
+
+td:first-of-type {
+    text-align: left;
+    padding-left: 5px;
+}
+
+td {
+	background: white;
+    color: black;
+    border: 2px solid #aaa;
+}
+
+#firstRow, #firstRow2 {
+	background: lightgray;
+    border: 1px solid white;
+}
+
+.scoreRow {
+    height:50px;
+}
+
+#out,
+#initial{
+   font-size: 12px;
+}
+
+/*-------------Icons=-------------*/
+
+.editIcon {
+    position: absolute;
+	width: 98.5%;
+	text-align: right;
+	text-decoration: none;
+	color: #72bf00;
+	font-size: 25px;
+
+}
+
+.archive {
+    border: 2px solid gray;
+    height: 40px;
+    width: 720px;
+    color: black;
+    padding: 5px;
+
+}
+
+.archive:hover {
+    background-color: #eee;
+}
+
+#menu, h3 {
+    font-size: 16px;
+}
+
+#archive_title {
+    margin-top: 10px;
+    font-size: 18px;
+}

@@ -1,0 +1,120 @@
+
+
+/*----------profileLeftBox------------*/
+
+.column {
+    padding:0;
+}
+
+.profileLeftBox {
+    position: relative;
+    float:left;
+    width:100%;
+    padding:15px 25px;
+}
+
+.profileLeftBox h4,
+.rightBox h4{
+    margin-bottom: 20px;
+}
+
+
+.profileForm,
+.experienceForm,
+.contactForm {
+    width:100%;
+    margin-bottom: 15px;
+    /*border: 1px solid #444;*/
+}
+
+.experienceForm .form-control,
+.profileForm .form-control,
+.contactForm .form-control{
+    width:348px;
+
+}
+
+.experienceForm .form-group,
+.profileForm .form-group,
+.contactForm .form-group{
+    margin-bottom: 7px;
+}
+
+.profileForm img {
+    position:relative;
+    float:left;
+
+}
+.profileForm .column {
+    position:relative;
+    float:left;
+    margin-left: 10px;
+}
+
+.formDescription {
+    font-size: 11px;
+    font-style:italic;
+    text-align: left;
+    margin-top: 5px;
+    color: #72bf00;
+}
+
+.contactForm .form-group {
+    margin-left: 0;
+    /*border: 1px solid #444;*/
+}
+
+.contactForm .row {
+    display: inline:block;
+}
+
+.form-inline .form-control{
+    width:166px;
+}
+/*----------------RIGHTBOX----------------*/
+
+.rightBox {
+    margin-top:-602px;
+    float:right;
+    /*padding:15px 25px;*/
+}
+
+.rightBox .col-md-6 {
+    padding:15px 25px;
+    width:100%;
+    height: 375px;
+}
+
+/*-----Edit Icon------*/
+
+.editIcon {
+    position: absolute;
+	width: 95%;
+	text-align: right;
+	text-decoration: none;
+	color: #72bf00;
+	font-size: 18px;
+    margin-top: -14px;
+
+}
+
+.saveIcon {
+    position: absolute;
+    color: #ee4d00;
+    width:95%;
+    text-align: right;
+    margin-top: -10px;
+    font-size: 18px;
+}
+
+.addIcon {
+    font-size: 22px;
+    color: #72bf00;
+}
+
+
+.minusIcon {
+    font-size: 22px;
+    color: #72bf00;
+}
+
