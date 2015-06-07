@@ -5,10 +5,10 @@
 #### imports ####
 #################
 
-from flask import Blueprint, request
+from flask import Blueprint, request, session, g
 from flask_restful import Api, Resource, url_for, reqparse, abort
 
-from flask.ext.login import login_required
+from flask.ext.login import login_required, current_user
 
 
 from project import bcrypt, db
@@ -16,9 +16,6 @@ from project.models import User
 from flask_wtf import Form
 from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
-
-
-
 
 
 
@@ -91,9 +88,37 @@ To Be Added:
 Course: Name of Course. <String>
 Users: ID of other users on this scorecard. (Not sure what type)
 
-
 """
 
+class ScoreCardListAPI(Resource):
+    decorators = [login_required]
 
-api.add_resource(ExampleItem, '/example/<int:id>')
-api.add_resource(ScoreCardSimple, '/scorecard/<int:user_id>/<string:card_id>')
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        # self.reqparse.add_argument()
+
+    def get(self):
+        #
+        return {'scorecards': ['1','2','3']}
+
+    def post(self, user_id):
+        # create new ScoreCard
+        pass
+
+class ScoreCardAPI(Resource):
+    decorators = [login_required]
+
+    def get(self, card_id):
+        user_id = current_user.id
+        return {'example': str(user_id) + ' ' + str(card_id)}
+
+    def put(self, card_id):
+        pass
+
+    def delete(self, card_id):
+        pass
+
+
+
+api.add_resource(ScoreCardListAPI, '/api/scorecards/')
+api.add_resource(ScoreCardAPI, '/api/scorecards/<int:card_id>')

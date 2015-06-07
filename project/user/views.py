@@ -7,7 +7,8 @@
 
 from flask import render_template, Blueprint, url_for, \
     redirect, flash, request
-from flask.ext.login import login_user, logout_user, login_required
+from flask.ext.login import login_user, logout_user, login_required, \
+    LoginManager, current_user
 
 from project import bcrypt, db
 from project.models import User
@@ -18,6 +19,16 @@ from project.user.forms import LoginForm, RegisterForm
 ################
 
 user_blueprint = Blueprint('user', __name__,)
+login_manager = LoginManager()
+
+@login_manager.user_loader
+def user_loader(user_id):
+    """  Given *user_id*, return the associated User object.
+    :param unicode user_id: user_id (email) user to retrieve
+    """
+    return User.query.get(user_id)
+
+
 
 
 ################

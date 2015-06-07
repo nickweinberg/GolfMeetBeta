@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 {% block content %}
   <h3>Welcome, <em>{{ current_user.email }}</em>!</h3>
+  <p>{{ current_user }}</p>
   <p>Score card page: <a href="{{ url_for('scorecard.scorecard_main') }}">Score Cards</a></p>
 
 {% endblock %}
