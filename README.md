@@ -33,6 +33,21 @@ $ python manage.py create_data
 $ python manage.py runserver
 ```
 
+### Install node_modules
+'''sh
+$ cd project/static/js/
+$ npm install webpack -g
+$ npm install
+'''
+
+
+### Webpack Transform JSX
+'''sh
+$ cd project/static/js/
+$ webpack --watch
+'''
+
+
 ### Testing
 
 Without coverage:
@@ -46,3 +61,5 @@ With coverage:
 ```sh
 $ python manage.py cov
 ```
+
+
