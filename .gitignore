@@ -10,4 +10,4 @@ __pycahe__
 .DS_Store
 env.sh
 
-node_module/
+project/static/js/node_modules/
