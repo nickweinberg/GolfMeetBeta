@@ -1,0 +1,17 @@
+{
+  "name": "GolfmeetBeta",
+  "version": "1.0.0",
+  "description": "js for golfmeet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "jsx-loader": "^0.12.2"
+  }
+}
