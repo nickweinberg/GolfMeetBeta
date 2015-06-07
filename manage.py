@@ -16,7 +16,7 @@ COV = coverage.coverage(
 COV.start()
 
 from project import app, db
-from project.models import User
+from project.models import User, ScoreCard
 
 
 migrate = Migrate(app, db)

@@ -12,7 +12,8 @@ from flask.ext.login import login_required, current_user
 
 
 from project import bcrypt, db
-from project.models import User
+from project.models import User, ScoreCard
+
 from flask_wtf import Form
 from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
@@ -98,7 +99,9 @@ class ScoreCardListAPI(Resource):
         # self.reqparse.add_argument()
 
     def get(self):
-        #
+        # get all scorecards
+        user_id = current_user.id
+
         return {'scorecards': ['1','2','3']}
 
     def post(self, user_id):
