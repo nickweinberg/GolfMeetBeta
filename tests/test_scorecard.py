@@ -12,4 +12,11 @@ from project.user.forms import LoginForm
 
 class TestScoreCardBlueprint(BaseTestCase):
     def test_create_new_scorecard(self):
-        pass
+        # Ensure registration behaves correctlys.
+
+        with self.client:
+            response = self.client.post(
+                '/api/scorecards',
+                data=dict(scores="1-1-2-3-4-1-1"),
+                follow_redirects=True
+            )

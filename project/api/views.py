@@ -104,9 +104,17 @@ class ScoreCardListAPI(Resource):
 
         return {'scorecards': ['1','2','3']}
 
-    def post(self, user_id):
+    def post(self):
         # create new ScoreCard
-        pass
+        form = request.form
+        user_id = current_user.id
+        new_scorecard = ScoreCard(
+            scores=form['scores'],
+            user_id=user_id
+        )
+
+        db.session.add(new_scorecard)
+        db.session.commit()
 
 class ScoreCardAPI(Resource):
     decorators = [login_required]
@@ -114,6 +122,8 @@ class ScoreCardAPI(Resource):
     def get(self, card_id):
         user_id = current_user.id
         return {'example': str(user_id) + ' ' + str(card_id)}
+
+
 
     def put(self, card_id):
         pass
@@ -123,5 +133,5 @@ class ScoreCardAPI(Resource):
 
 
 
-api.add_resource(ScoreCardListAPI, '/api/scorecards/')
+api.add_resource(ScoreCardListAPI, '/api/scorecards')
 api.add_resource(ScoreCardAPI, '/api/scorecards/<int:card_id>')
