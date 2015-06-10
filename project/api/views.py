@@ -6,10 +6,10 @@
 #################
 
 from flask import Blueprint, request, session, g
-from flask_restful import Api, Resource, url_for, reqparse, abort
+from flask_restful import Api, Resource, url_for, reqparse, abort, fields, marshal
 
 from flask.ext.login import login_required, current_user
-
+from sqlalchemy.exc import IntegrityError
 
 from project import bcrypt, db
 from project.models import User, ScoreCard
@@ -91,6 +91,12 @@ Users: ID of other users on this scorecard. (Not sure what type)
 
 """
 
+scorecard_fields = {
+   'scores': fields.String,
+   'user_id': fields.Integer,
+   'uri': fields.Url('scorecard')
+}
+
 class ScoreCardListAPI(Resource):
     decorators = [login_required]
 
@@ -102,19 +108,30 @@ class ScoreCardListAPI(Resource):
         # get all scorecards
         user_id = current_user.id
 
-        return {'scorecards': ['1','2','3']}
+        user = User.query.filter_by(id=user_id).first()
+        all_scorecards = user.scorecards
+
+        return {'scorecards': all_scorecards}
 
     def post(self):
         # create new ScoreCard
         form = request.form
+
+        # TODO: Add parser, depending on score format we settle on.
         user_id = current_user.id
         new_scorecard = ScoreCard(
             scores=form['scores'],
             user_id=user_id
         )
+        try:
+            db.session.add(new_scorecard)
+            db.session.commit()
+        except IntegrityError, exc:
+            return {"error": exc.message}, 500
 
-        db.session.add(new_scorecard)
-        db.session.commit()
+        # return success
+        return {'scorecard': marshal(new_scorecard, scorecard_fields)}, 201
+
 
 class ScoreCardAPI(Resource):
     decorators = [login_required]
@@ -133,5 +150,5 @@ class ScoreCardAPI(Resource):
 
 
 
-api.add_resource(ScoreCardListAPI, '/api/scorecards')
-api.add_resource(ScoreCardAPI, '/api/scorecards/<int:card_id>')
+api.add_resource(ScoreCardListAPI, '/api/scorecards', endpoint="scorecard_list")
+api.add_resource(ScoreCardAPI, '/api/scorecards/<int:card_id>', endpoint="scorecard")
