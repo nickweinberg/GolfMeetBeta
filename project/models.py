@@ -61,6 +61,9 @@ class Score(db.Model):
 
 class ScoreCard(db.Model):
     """ A collection of Score's """
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     __tablename__ = "scorecards"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     # saving scores just as a string for now

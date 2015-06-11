@@ -43,25 +43,6 @@ class ScoreCardForm(Form):
 ### resources ##
 ################
 
-class ExampleItem(Resource):
-    def get(self, id):
-        return {'example': 'Hello Whatever'}
-
-
-class ScoreCardSimple(Resource):
-    decorators = [login_required]
-
-    def get(self, card_id):
-        return {card_id: scorecards[card_id]}
-
-    def put(self, card_id):
-        scorecards[card_id] = request.form['data']
-        return {card_id: scorecards[card_id]}
-
-
-
-
-scorecards = {'1': '123'}
 """ ScoreCard API
 HTTP: URI
     - ACTION
@@ -97,6 +78,9 @@ scorecard_fields = {
    'uri': fields.Url('scorecard')
 }
 
+
+
+
 class ScoreCardListAPI(Resource):
     decorators = [login_required]
 
@@ -118,19 +102,33 @@ class ScoreCardListAPI(Resource):
         form = request.form
 
         # TODO: Add parser, depending on score format we settle on.
+        parser = reqparse.RequestParser()
+        parser.add_argument('scores', type=str, required=True, help='golf scores in string format')
+        parser.add_argument('user_id', type=int, required=True, help='scorecard owner user id')
+
+        args = parser.parse_args()
+
         user_id = current_user.id
-        new_scorecard = ScoreCard(
-            scores=form['scores'],
-            user_id=user_id
-        )
+        # new_scorecard = ScoreCard(
+        #     scores=form['scores'],
+        #     user_id=user_id
+        # )
+
+        new_scorecard = ScoreCard()
+        new_scorecard.scores = args["scores"]
+        new_scorecard.user_id = args["user_id"]
+
         try:
             db.session.add(new_scorecard)
             db.session.commit()
+            print(new_scorecard.as_dict())
+            return new_scorecard.as_dict(), 201
+
         except IntegrityError, exc:
             return {"error": exc.message}, 500
 
         # return success
-        return {'scorecard': marshal(new_scorecard, scorecard_fields)}, 201
+        # return {'scorecard': marshal(new_scorecard, scorecard_fields)}, 201
 
 
 class ScoreCardAPI(Resource):
@@ -139,8 +137,6 @@ class ScoreCardAPI(Resource):
     def get(self, card_id):
         user_id = current_user.id
         return {'example': str(user_id) + ' ' + str(card_id)}
-
-
 
     def put(self, card_id):
         pass

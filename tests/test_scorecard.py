@@ -15,6 +15,8 @@ curl -i -X POST -H "Content-Type: application/json" -d '{"scores":"12-23-995-22"
 
 
 """
+
+
 class TestScoreCardBlueprint(BaseTestCase):
     def test_create_new_scorecard(self):
         # Ensure registration behaves correctlys.
@@ -23,17 +25,15 @@ class TestScoreCardBlueprint(BaseTestCase):
             # login first
             self.client.post('/login', data=dict(
                 email='ad@min.com', password='admin_user'
-            ), follow_redirects=True)
+            ))
 
             response = self.client.post(
                 '/api/scorecards',
                 data=dict(scores="1-1-2-3-4-1-1"),
                 headers={'content-type':'application/json'}
             )
-            print(response)
 
         self.assertEqual(response.status_code, 201)
-
 
     def test_create_scorecard_no_scores(self):
 
