@@ -92,10 +92,14 @@ class ScoreCardListAPI(Resource):
         # get all scorecards
         user_id = current_user.id
 
+        # query database of User with id of user_id
         user = User.query.filter_by(id=user_id).first()
-        all_scorecards = user.scorecards
+        # user.scorecards is list of all a User's scorecards
+        # as_dict() is method on Scorecard model turns model
+        # into something JSON serializable.
+        results = [card.as_dict() for card in user.scorecards]
 
-        return {'scorecards': all_scorecards}
+        return {'scorecards': results} # return json
 
     def post(self):
         # create new ScoreCard
